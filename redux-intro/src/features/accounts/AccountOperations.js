@@ -20,7 +20,7 @@ function AccountOperations() {
   console.log(balance);
   function handleDeposit() {
     if (!depositAmount) return;
-    dispatch(deposit(depositAmount));
+    dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
     setCurrency("USD");
   }
