@@ -1,12 +1,17 @@
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { thunk } from "redux-thunk";
+
 import Accountreducer from "./features/accounts/accountsSlice";
 import customerReducer from "./features/customers/customerSlice";
+
 const rootReducer = combineReducers({
   account: Accountreducer,
   customer: customerReducer,
 });
-const store = createStore(rootReducer);
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 export default store;
+
 // store.dispatch(deposit(500));
 // store.dispatch(withdraw(200));
 // console.log(store.getState());
