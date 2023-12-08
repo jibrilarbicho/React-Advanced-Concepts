@@ -1,15 +1,24 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import { thunk } from "redux-thunk";
-
+// import { applyMiddleware, combineReducers, createStore } from "redux";
+// import { thunk } from "redux-thunk";
 import Accountreducer from "./features/accounts/accountsSlice";
 import customerReducer from "./features/customers/customerSlice";
+// import { composeWithDevTools } from "@redux-devtools/extension";
+import { configureStore } from "@reduxjs/toolkit";
+// const rootReducer = combineReducers({
+//   account: Accountreducer,
+//   customer: customerReducer,
+// });
 
-const rootReducer = combineReducers({
-  account: Accountreducer,
-  customer: customerReducer,
+// const store = createStore(
+//   rootReducer,
+//   composeWithDevTools(applyMiddleware(thunk))
+// );
+const store = configureStore({
+  reducer: {
+    account: Accountreducer,
+    customer: customerReducer,
+  },
 });
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
 export default store;
 
 // store.dispatch(deposit(500));

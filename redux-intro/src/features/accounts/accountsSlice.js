@@ -42,6 +42,7 @@ export default function Accountreducer(state = initialStateAccount, action) {
 
 export function deposit(amount, currency) {
   if (currency === "USD") return { type: "account/ deposit", payload: amount };
+  console.log(currency);
   return async function (dispatch, getState) {
     dispatch({ type: "account/convertingCurrency" });
     const res = await fetch(
