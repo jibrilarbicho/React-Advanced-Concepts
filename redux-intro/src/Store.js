@@ -19,6 +19,7 @@ const store = configureStore({
     customer: customerReducer,
   },
 });
+console.log(store);
 export default store;
 
 // store.dispatch(deposit(500));
