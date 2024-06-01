@@ -19,6 +19,8 @@ const cartSlice=createSlice({
         IncreaseItemQuantity(state,action){
             const item=state.cart.find(item=>
                 item.PizzaId===action.payload)
+                console.log("item",item);
+                console.log("jimma");
             item.quantity++
 
             item.totalPrice +=item.quantity*item.unitPrice
@@ -28,8 +30,14 @@ const cartSlice=createSlice({
             const item=state.cart.find(item=>
                 item.PizzaId===action.payload)
             item.quantity--
+        
 
             item.totalPrice +=item.quantity*item.unitPrice
+            
+if(item.quantity===0){
+    cartSlice.caseReducers.removeFromCart(state,action)
+}
+
         },
         ClearCart(state){
             state.cart=[]
