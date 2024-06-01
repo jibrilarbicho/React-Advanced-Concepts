@@ -1,11 +1,15 @@
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from "../cart/CartSlice";
+import DeleteItem from "../cart/DeleteItem";
 function MenuItem({ pizza }) {
   const dispatch=useDispatch()
+  const  cart=useSelector(state=>state.cart.cart)
   const { id,name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
- const  handleAddTocart=()=>{
+  const isExist=cart.find((item)=>item.PizzaId===id)
+  console.log("isExist: " ,isExist);
+ const  handleAddToCart=()=>{
   const  newItem={
     PizzaId:id,
     name,
@@ -22,10 +26,15 @@ dispatch(addToCart(newItem)) }
         <p>{ingredients.join(", ")}</p>
         <div className="mt-auto flex  items-center justify-between">
           {!soldOut ? <p className="text-sm ">{formatCurrency(unitPrice)}</p> : <p className="text-sm uppercase font-medium text-stone-500">Sold out</p>}
-          {
-            !soldOut&&           <Button type="small" onClick={handleAddTocart}  >Add To Cart</Button>
 
-          }
+         
+          {!soldOut && (
+            isExist ? (
+              <DeleteItem pizzaId={id} /> 
+            ) : (
+              <Button type="small" onClick={handleAddToCart}>Add To Cart</Button>
+            )
+          )}
           
 
           </div>
