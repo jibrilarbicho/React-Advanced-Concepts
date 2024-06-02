@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {
   calcMinutesLeft,
@@ -7,6 +7,7 @@ import {
 } from "../../utils/helpers";
 import CartItem from "../cart/CartItem";
 import OrderItem from "./OrderItem";
+import { useEffect } from "react";
 
 // const order = {
 //   id: "ABCDEF",
@@ -56,6 +57,17 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+  const fetcher = useFetcher();
+
+useEffect(
+  function () {
+    if (!fetcher.data && fetcher.state === 'idle') {
+      fetcher.load('/menu');
+    }
+  },
+  [fetcher]
+);
+console.log("data",fetcher.data);
 
   return (
     <div className="px-4 py-6 space-y-8">
