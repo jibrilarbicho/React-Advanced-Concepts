@@ -18,8 +18,9 @@ const Main = styled.main`
 function AppLayout() {
   return (
     <StyledAppLayout>
-      <Header />
       <Sidebar />
+
+      <Header />
 
       <Main>
         <Outlet />
