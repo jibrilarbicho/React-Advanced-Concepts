@@ -37,6 +37,7 @@ export default function CabinTable() {
     queryKey: ["cabins"],
     queryFn: getCabins,
   });
+  console.log("cabins", cabins);
   if (isLoading) return <Spinner />;
   return (
     <Table role="table">
